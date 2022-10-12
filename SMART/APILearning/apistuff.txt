@@ -1,0 +1,5 @@
+http://docs.python-requests.org/en/master/user/quickstart/#make-a-request
+https://www.circl.lu/services/cve-search/
+https://www.dataquest.io/blog/python-api-tutorial/
+
+

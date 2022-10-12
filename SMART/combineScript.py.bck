@@ -1,0 +1,636 @@
+#!/usr/bin/env python
+
+'''
+ The purpose of this function is to combine the security risk calculation and CVSS score look-up
+'''
+
+'''
+ Imports for script
+'''
+import .Calculation.securityRisk
+import APILearning.cveGrab
+import XMLParsing.xmlParsing
+import itertools
+import Database.ioDatabase
+import numpy as np                  # Imported for creating a range of values
+# Added for performing 3D graphing
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+
+'''
+ Global Variables
+'''
+debugBit = 0
+
+'''
+ Function Definitions
+'''
+
+'''
+ Example CVE list from multie branch example
+    ____________R____________
+    |       |       |       |   
+   sn1     sn2     sn3     sn4
+   |                        |
+   |                        |
+  ssn1                     ssn2
+
+ Prodcued Leaf List:
+    ['/rootNode/subNodes[1]/subNodes', '/rootNode/subNodes[2]', '/rootNode/subNodes[3]', '/rootNode/subNodes[4]/subNodes']
+
+ Produced CVE List:
+    [[['CVE-2018-1000168'], ['CVE-2018-1000032'], ['CVE-2018-1000153']], [['CVE-2018-1000300'], ['CVE-2018-1000153']], [['CVE-2018-1000039'], ['CVE-2018-1000153']], [['CVE-2018-1000032', 'CVE-2018-1000039', 'CVE-2018-1000168', 'CVE-2018-1000301'], ['CVE-2018-1000301'], ['CVE-2018-1000153']]]
+    -> For ease of understanding, basically have:
+        '/rootNode/subNodes[1]/subNodes'    -   [['CVE-2018-1000168'], ['CVE-2018-1000032'], ['CVE-2018-1000153']]
+        '/rootNode/subNodes[2]'             -   [['CVE-2018-1000300'], ['CVE-2018-1000153']]
+        '/rootNode/subNodes[3]'             -   [['CVE-2018-1000039'], ['CVE-2018-1000153']]
+        '/rootNode/subNodes[4]/subNodes'    -   [['CVE-2018-1000032', 'CVE-2018-1000039', 'CVE-2018-1000168', 'CVE-2018-1000301'], ['CVE-2018-1000301'], ['CVE-2018-1000153']]
+        => Nota Bene: These CVE lists are backwards from leaf to root
+
+    Example of cleaning lists:
+        for list in cveList:
+            print("List: " + str(list))     # Gets breakdown of each CVE list for each leaf path
+        -> One more for-loop grabs each sub item
+            -   Create separate path list
+                For each sublist in list:
+                    if len(sublist) == 1:
+                        append single item to larger list
+                    else:
+                        group together each item in a '()' boundary marked list(? is this the best way to do it?)
+                return edited paths
+                ????
+                PROFIT!
+'''
+###
+# Functions for interacting with the Database       | USE THESE TO LOOK UP VALUES FOR ENTERIES
+###
+# Function for reading in the asset database
+def readAssetDb():
+    print("[*] Reading in the Assets Database")
+    return Database.ioDatabase.readJSON('Database/assetValDb.json')
+
+# function for reading in the costs database
+def readCostDb():
+    print("[*] Reading in the Costs Database")
+    return Database.ioDatabase.readJSON('Database/costValDb.json')
+
+# Function for reading in the risk database
+def readRiskDb():
+    print("[*] Reading in the Risks Database")
+    return Database.ioDatabase.readJSON('Database/riskValDb.json')
+
+# Function for collecting Ps values
+def getPsVal(jsonData, vulnName):
+    entryData = Database.ioDatabase.findEntry(jsonData, vulnName)
+    return Database.ioDatabase.retProbOfSuccess(entryData)
+
+# Function for collecting Ca values
+def getCaVal(jsonData, vulnName):
+   entryData = Database.ioDatabase.findEntry(jsonData, vulnName)
+   return Database.ioDatabase.retCostOfAttack(entryData)
+
+# Function for collecting Impact values
+def getImpact(jsonData, assetName):
+    entryData = Database.ioDatabase.findEntry(jsonData, assetName)
+    return Database.ioDatabase.retImpact(entryData)
+
+# Function for collecting Attack Value
+def getAtkrVal(jsonData, assetName):
+    entryData = Database.ioDatabase.findEntry(jsonData, assetName)
+    return Database.ioDatabase.retAtkrVal(entryData)
+
+# Function for collecting Scale Amount
+def getScaleAmnt(jsonData, assetName):
+    entryData = Database.ioDatabase.findEntry(jsonData, assetName)
+    return Database.ioDatabase.retScaleAmnt(entryData)
+
+# Function for collecting Alpha value
+def getAlpha(jsonData, assetName):
+    entryData = Database.ioDatabase.findEntry(jsonData, assetName)
+    return Database.ioDatabase.retAlpha(entryData)
+
+# Function for collecting Inital Cost value
+def getInitCost(jsonData, elemName):
+    entryData = Database.ioDatabase.findEntry(jsonData, elemName)
+    return Database.ioDatabase.retCostOfInit(entryData)
+
+# Function for collecting Cost of Maintainence value
+def getCmVal(jsonData, elemName):
+     entryData = Database.ioDatabase.findEntry(jsonData, elemName)
+     return Database.ioDatabase.retCostOfMain(entryData)
+
+# Function for collecting Cost of Operaiton value
+def getCoVal(jsonData, elemName):
+    entryData = Database.ioDatabase.findEntry(jsonData, elemName)
+    return Database.ioDatabase.retCostOfOper(entryData)
+
+###
+# Bringing in databases for code
+###
+# Read in database files as global variables
+riskDatabase = readRiskDb()
+costDatabase = readCostDb()
+assetDatabase = readAssetDb()
+
+###
+# Functions for the rest of the code
+###
+
+# Function for reading in attack tree files and producing a Security Risk function
+#def 
+    # Clean-up the CVE information so that each path is evaluated separately
+
+# Function for returning a list of probabilities based on a provided CVE list
+def calcPSpath(elementCVEList):
+    pathProbList = []
+    print("\tInput Master CVE List: " + str(elementCVEList))
+    # Create loop to grab each CVE List for the separate leaf-to-root paths
+    for subCVElist in elementCVEList:
+        print("Sub List: " + str(subCVElist))
+        # Need to create separate probability values for each path item
+        subCVEList_PS = []
+        # Note: any for loop at this nested level will be all the vulnerabilities for a given node
+        for nodeCVEs in subCVElist:
+            nodeProb = 1    # Allows for cumulative multiplication of the found probabilities from CVE information
+            for nodeCVE in nodeCVEs:    # looping through each CVE found for a given node in the path list
+                nodeProb *= float(APILearning.cveGrab.main(nodeCVE))/10   # Produce a product of each CVE's CVSS score (porbability of risk) for a given node
+            subCVEList_PS.append(nodeProb)   # Append the found Probability of Success (PS) to a list [representing the differening PS for a given path]
+        pathProbList.append(subCVEList_PS)  # Creates a set of probabilities for each path that was examined in this loop
+    print("[*] Created probabilities list for each path")
+    return pathProbList
+
+# Function for returning a list of attacker costs based on a provided CVE list
+# Input expected as follows:                    |   NOTE: Maybe just need to pass in a different input?
+#       [[Path #1 Nodes],[Path #2 Nodes],.....,[Path #N Nodes]]
+#               |
+#               |   <--- Epanding the 'Path #1 Nodes' Set
+#               |
+#   [[Ca CVE #1 Node #1, Ca CVE #2 Node #1,....., Ca CVE #N Node #1],...,[Ca CVE #1 Node #N,...,Ca CVE #N Node #N]]
+def calcAttackCostpath(elementCVEList):
+    pathAttackCostList = []
+    # Create loop to grab each CVE List for the separat leaf-to-root paths
+    for subCVElist in elementCVEList:
+        subCVEList_AttackCost = []
+        # Note: any for loop at this nested level will be all the vulnerabilities for a given node
+        for nodeCVEs in subCVElist:
+            nodeCostOfAttack = 0    # Allows for summation of the user supplied attack costs from CVE information
+            for nodeCVE in nodeCVEs:    # looping through each CVE found for a given node in the path list
+                if getCaVal(riskDatabase, nodeCVE) is not None:       # Check that Ca could be found in Risk Database
+                    nodeCostOfAttack += float(getCaVal(riskDatabase, nodeCVE))
+                else:
+                    nodeCostOfAttack += float(input('What is the cost of attack for ' + str(nodeCVE) + ': '))
+            subCVEList_AttackCost.append(nodeCostOfAttack)
+        pathAttackCostList.append(subCVEList_AttackCost)
+    print("[*] Created attack costs list for each path")
+    return pathAttackCostList
+
+# Function for returning a list of initial cost information based on element node names [BASED ON USER SUPPLIED INPUT]
+def getGraphElementsInitCost(elementNameList): 
+    pathElemList_initCost = []
+    for subElemList in elementNameList:
+        subElemList_initCost = []
+        for nodeElem in subElemList:
+            print("Element: " + nodeElem)
+            if getInitCost(costDatabase, nodeElem) is not None:        # Check if entry exists in Costs Database
+                subElemList_initCost.append(float(getInitCost(costDatabase, nodeElem)))
+            else:
+                subElemList_initCost.append(float(input('What is the initial cost for ' + str(nodeElem) + ': ')))
+        pathElemList_initCost.append(subElemList_initCost)
+    return pathElemList_initCost
+
+# Function for returning a list of impact information based on element node names [BASED ON USER SUPPLIED INPUT]
+def getGraphElementsImpact(elementNameList):
+    pathElementList_Impact = []
+    for subElemList in elementNameList:
+        subElemList_impact = []
+        for nodeElem in subElemList:
+            if getImpact(riskDatabase, nodeElem) is not None:     # Check that Impact value is found in Asset Database
+                subElemList_impact.append(float(getImpact(riskDatabase, nodeElem)))
+            else:
+                subElemList_impact.append(float(input('What is the impact for ' + str(nodeElem) + ': ')))
+        pathElemList_Impact.append(subElemList_impact)
+    return pathElementList_Impact
+
+'''
+# Function for returning a list of attacker ocst information based on element node names [BASED ON USER SUPPLIED INPUT]
+# Note: This does NOT do what I need....... Need to perform summation for each path
+#   -> Write similar to 'calcPSpath()' function?
+def getGraphElementsAttackCost(elementNameList):
+    pathElementList_attackCost = []
+    for subElemList in elementNameList:
+        subElemList_attackCost = []
+        for nodeElem in subElemList:
+            subElemList_attackCost.append(float(input('What is the attack cost for ' + str(nodeElem) + ': ')))
+        pathElementList_attackCost.append(subElemList_attackCost)
+    return pathElementList_attackCost
+# Note: the above function is not useful
+'''
+
+# Function for summing together SR values based on some basic values
+#   -> NOTE: This function is ONLY purposed for producing a 3D graph of values
+def sumSRTest(graphPSList, path_alpha, attackVal, graphAttackCostList, impactVal, graphInitCostList, path_scaleAmount):
+    pathList_SecurityRisk = []
+    for subList in range(len(graphPSList)):
+        pathList_SecurityRisk.append(Calculation.securityRisk.pathCostCalc(graphPSList[subList], path_alpha, attackVal, graphAttackCostList[subList], impactVal, graphInitCostList[subList], 70000, 2450, path_scaleAmount))
+    sumSR = 0
+    for SRitem in pathList_SecurityRisk:
+        sumSR += SRitem
+    return sumSR
+
+
+# Function for creating a series of different values based on changes to Attack Value (A) and Impact (I)
+# Input:    Attack graph file, Vector of A values, Vector of I values
+# Output:   Vector of SR values
+def graph3DRisk(filepath):
+    print("[*] ---------- Working to Create a 3D Graph ------------ [*]")
+    #path_scaleAmount = int(input('What is the scale amount for the values being supplied by the user (e.g. 1000): '))  # Ask for after getting the attack graph root node
+    graphTree = XMLParsing.xmlParsing.readAttackTree(filepath)
+    # Get the set of paths to the leafs (e.g. suNodes)
+    graphxpath = XMLParsing.xmlParsing.findLeafs(graphTree.getroot()[0])  # Passing the rootNode to get all existing leafs
+    graphCVEList = XMLParsing.xmlParsing.buildCVEList(graphxpath, graphTree)   # NOTE: No need for "root paths" since a product of PoS is taken
+    graphNameList = XMLParsing.xmlParsing.buildNameList(graphxpath, graphTree)
+    graphPSList = []
+    graphAttackCostList = []
+    for subPaths in graphCVEList:
+        attackPaths = list(itertools.product(*subPaths))
+        atkPathsPS = calcPSpath([attackPaths])
+        atkPathsCA = calcAttackCostpath([attackPaths])
+        graphPSList.append(*atkPathsPS)
+        graphAttackCostList.append(*atkPathsCA)
+    # NOTE: Moved the below initCost to the above "every path combination" loop |   NOTE: WRONG ABOUT THIS!!
+    graphInitCostList = getGraphElementsInitCost(graphNameList)
+    # Prepare values for user requests
+    rootNodeTag = graphTree.getroot()[0].tag
+    rootNodeName = graphTree.getroot()[0].get('name')
+    ##
+    # Collecting scale information about target asset from code Database    | WORKS :D TODO: If not found, ask for value and add; then check & change
+    #       -> Turn the if-else statement question into a function??, would take a string mask and a function to test??
+    ##
+    # Try to find the scale amount information from the assetDatabase
+    if getScaleAmnt(assetDatabase, rootNodeName) is not None:     # Check if the asset exists within the Asset Database
+        path_scaleAmount = int(getScaleAmnt(assetDatabase, rootNodeName))
+    else:       # Could NOT find the value within the Asset Database, therefore asking the user for the information
+        path_scaleAmount = int(input('What is the scale amount for the values being supplied by the user (e.g. 1000): '))
+    # Try to find the impact amount informatio from the assetDatabase
+    if getImpact(assetDatabase, rootNodeName) is not None:      # Check if the asset exists within the Asset Database
+        path_impact = float(getImpact(assetDatabase, rootNodeName))
+    else:
+        path_impact = float(input('What is the impact for ' + str(rootNodeTag) + ' ' + str(rootNodeName) + '(0.0 to 99.9): '))
+    # Try to find the attack value informaiton from the assetDatabase
+    if getAtkrVal(assetDatabase, rootNodeName) is not None:       # Check if the asset exists within the Asset Database
+        path_attackValue = float(getAtkrVal(assetDatabase, rootNodeName))
+    else:
+        path_attackValue = float(input('What is the attack value for ' + str(rootNodeTag) + ' ' + str(rootNodeName) + '(0.0 to 99.9): '))
+    # Try to find the alpha value information from the assetDatabase
+    if getAlpha(assetDatabase, rootNodeName) is not None:       # check if the asset exsists within the Asset Database
+        path_alpha = float(getAlpha(assetDatabase, rootNodeName))
+    else:
+        path_alpha = float(input('What is the alpha value for the attack graph: '))
+    print("[*] Calling security risk script with varaibles")
+    '''
+     Note: Input to the function below must be in a specific order
+        - item_PS
+        - item_alpha
+        - item_attackValue
+        - item_attackCost
+        - item_impact
+        - item_ci
+        - item_cost_maintenance
+        - item_cost_operation
+        - item_scaleAmount
+    '''
+    if debugBit != 0:
+        print("[?] Function Input Breakdown (FIB)..... combineScript::graphToRisk")
+        print("\tGraph PS:\t\t" + str(graphPSList) + "\n\tPath Alpha:\t\t" + str(path_alpha) + "\n\tPath AtkVal:\t\t" + str(path_attackValue) + "\n\tGraph Ca:\t\t" + str(graphAttackCostList) + "\n\tPath Impact:\t\t" + str(path_impact) + "\n\tGraph Ci:\t\t" + str(graphInitCostList) + "\n\tPath Scale:\t\t" + str(path_scaleAmount))
+    # Create range values for Attack Value (A) and Impact (I)
+    range_attackValue = np.arange(path_attackValue - 10, path_attackValue + 10, 0.5)
+    range_impact = np.arange(path_impact - 10, path_impact + 10, 0.5)
+    # Expand to larger ranges for graphing (e.g. X-Values - In repeating, but growing order, Y-Values - Repeating the same base range len() times
+    #   -> NOTE: Each of the following lists are of the same length
+    range_attackValue = [i for i in range_attackValue for _ in range_attackValue]   # Create list of repeated values growing from min to max    \____
+    range_impact = list(range_impact) * len(range_impact)                           # Create list of repeating values                           /    Works!!!
+    # Develop the additional points needed for the graphing (Going to scatter plot first)
+    #zs = [pathList_SecurityRisk.append(Calculation.securityRisk.pathCostCalc(graphPSList[subList], path_alpha, valA, graphAttackCostList[subList], valI, graphInitCostList[subList], 70000, 2450, path_scaleAmount)) for valA,valI in zip(range_attackValue, range_impact)]
+    zs = [sumSRTest(graphPSList, path_alpha, attackVal, graphAttackCostList, impactVal, graphInitCostList, path_scaleAmount) for attackVal,impactVal in zip(range_attackValue, range_impact)]   # Works like this for a line in 3D space.... how do I make a surface?
+    print("[?] Test output for function")
+    print("\tAttack Value Range: {0}\n\t\tLength: {3}\n\tImpact Value Range: {1}\n\t\tLength: {4}\n\tZ Values: {2}\n\t\tLength: {5}".format(range_attackValue, range_impact, zs, len(range_attackValue), len(range_impact), len(zs)))
+    '''
+    # Old test for creating different Z-axis values
+    testList = []   # Using this to create a list of SR Values based on change in Attack Value (A)
+    # First: Test loop of Attack Values
+    for attackVal in range_attackValue:
+        pathList_SecurityRisk = []
+        # Loop through each path of items to calculate the security risk per path
+        #   Nota Bene: Expectation is that the size of the lists is the same!! It should be based on how the code is written
+        for subList in range(len(graphPSList)):
+            pathList_SecurityRisk.append(Calculation.securityRisk.pathCostCalc(graphPSList[subList], path_alpha, attackVal, graphAttackCostList[subList], path_impact, graphInitCostList[subList], 70000, 2450, path_scaleAmount))  # Ensure that scaling is the SAME!!!
+        print("List of different path security risk values: " + str(pathList_SecurityRisk))
+        # NEED: Next summation of all the path security risk values to obtain the overall security risk
+        sumSR = 0
+        for SRitem in pathList_SecurityRisk:
+            sumSR += SRitem
+        print("[!] Total SR Value: " + str(sumSR))
+        testList.append(sumSR)
+    print("[!] Range of SR: " + str(testList))
+    # Output test
+    testRange = np.arange((path_attackValue - 10), path_attackValue + 10, 0.5)      # Create range of values 
+    print("[?] Test Range: " + str(testRange))
+    testRange2 = np.arange(path_impact - 10, path_impact + 10, 0.5)
+    print("[?] Test Range2: " +str(testRange2))
+    '''
+    # NEED: Get this function to return a list of not just the attackSR, but also the impactSR
+    #   -> Try to map a 3D graph using impact + attack value        | FIGURE OUT HOW THE FUCK TO DO THIS
+    # Creating the 3D graph space
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    # Adding in the points of data
+    ax.scatter(range_attackValue, range_impact, zs)     # Scatter graphing of data (to test that this will work)
+    # Labeling the Axis
+    ax.set_xlabel('Attack Value')
+    ax.set_ylabel('Impact Value')
+    ax.set_zlabel('Security Risk')
+    # Show the graph
+    plt.show()
+    return zs #testList     # Returns a list of SR values based on changing of Attack Value (A)
+
+# Function for reading an attack graph and returning the calculated security risk
+# NOTE: Need to fix so that this can calculate security risk for a SINGLE NODE!!! (e.g. root node)
+def graphToRisk(filepath):
+    print("[*] ---------- Calculating Security Risk based on passed Attack Graph ------------ [*]")
+    #path_scaleAmount = int(input('What is the scale amount for the values being supplied by the user (e.g. 1000): '))  # Ask for after getting the attack graph root node
+    graphTree = XMLParsing.xmlParsing.readAttackTree(filepath)
+    # Get the set of paths to the leafs (e.g. suNodes)
+    graphxpath = XMLParsing.xmlParsing.findLeafs(graphTree.getroot()[0])  # Passing the rootNode to get all existing leafs
+    graphCVEList = XMLParsing.xmlParsing.buildCVEList(graphxpath, graphTree)   # NOTE: No need for "root paths" since a product of PoS is taken
+    graphNameList = XMLParsing.xmlParsing.buildNameList(graphxpath, graphTree)
+    #graphPSList = calcPSpath(graphCVEList)  # NOTE: Check that this is being done correctly!!!! | SPOILER: It's not
+    graphPSList = []
+    graphAttackCostList = []
+    #graphInitCostList = []
+    if debugBit != 0:
+        print("[?] Test.... Structure of CVE List")
+        print("\tCVE List: " + str(graphCVEList))
+        print("\tLength: " + str(len(graphCVEList)))
+    for subPaths in graphCVEList:
+        print("SubPath: " + str(subPaths))
+        if debugBit != 0:
+            print("\tLength: " + str(len(subPaths)))
+        attackPaths = list(itertools.product(*subPaths))
+        atkPathsPS = calcPSpath([attackPaths])
+        atkPathsCA = calcAttackCostpath([attackPaths])
+        #atkPathsCI = getGraphElementsInitCost([*attackPaths])   # Wrong place to do Ci for paths?
+        graphPSList.append(*atkPathsPS)
+        graphAttackCostList.append(*atkPathsCA)
+        #graphInitCostList.append(*atkPathsCI)       # Get error: TypeError: append() takes exactly one argument (2 given)
+    # NOTE: Moved the below initCost to the above "every path combination" loop |   NOTE: WRONG ABOUT THIS!!
+    graphInitCostList = getGraphElementsInitCost(graphNameList)
+    '''
+    print("[?] Test.... Structure of Element Names List")
+    print("\tName List: " + str([graphNameList]))
+    print("\tLength: " + str(len([graphNameList])))
+    for subPaths in [graphNameList]:        # WRONG, this doesn't need to be done the same way, it just requires a sum based on the name list
+        print("SubPath: " + str(subPaths))
+        print("\tLength: " + str(len(subPaths)))
+        attackPaths = list(itertools.product(*subPaths))
+        print("Attack Path of Element Nodes:\t" + str(attackPaths))
+        atkPathsCI = getGraphElementsInitCost([*attackPaths])
+        graphInitCostList.append(*atkPathsCI)
+    print("\tCi List: " + str(graphInitCostList))
+    '''
+    # Change this so that we calculate a summation of Cost of Attack
+    #graphAttackCostList = calcAttackCostpath(graphCVEList)    #getGraphElementsAttackCost(testCVEList)
+    # Prepare values for user requests
+    rootNodeTag = graphTree.getroot()[0].tag
+    rootNodeName = graphTree.getroot()[0].get('name')
+    ##
+    # Collecting scale information about target asset from code Database    | WORKS :D TODO: If not found, ask for value and add; then check & change
+    #       -> Turn the if-else statement question into a function??, would take a string mask and a function to test??
+    ##
+    # Try to find the scale amount information from the assetDatabase
+    if getScaleAmnt(assetDatabase, rootNodeName) is not None:     # Check if the asset exists within the Asset Database
+        path_scaleAmount = int(getScaleAmnt(assetDatabase, rootNodeName))
+    else:       # Could NOT find the value within the Asset Database, therefore asking the user for the information
+        path_scaleAmount = int(input('What is the scale amount for the values being supplied by the user (e.g. 1000): '))
+    # Try to find the impact amount informatio from the assetDatabase
+    if getImpact(assetDatabase, rootNodeName) is not None:      # Check if the asset exists within the Asset Database
+        path_impact = float(getImpact(assetDatabase, rootNodeName))
+    else:
+        path_impact = float(input('What is the impact for ' + str(rootNodeTag) + ' ' + str(rootNodeName) + '(0.0 to 99.9): '))
+    # Try to find the attack value informaiton from the assetDatabase
+    if getAtkrVal(assetDatabase, rootNodeName) is not None:       # Check if the asset exists within the Asset Database
+        path_attackValue = float(getAtkrVal(assetDatabase, rootNodeName))
+    else:
+        path_attackValue = float(input('What is the attack value for ' + str(rootNodeTag) + ' ' + str(rootNodeName) + '(0.0 to 99.9): '))
+    # Try to find the alpha value information from the assetDatabase
+    if getAlpha(assetDatabase, rootNodeName) is not None:       # check if the asset exsists within the Asset Database
+        path_alpha = float(getAlpha(assetDatabase, rootNodeName))
+    else:
+        path_alpha = float(input('What is the alpha value for the attack graph: '))
+    print("[*] Calling security risk script with varaibles")
+    '''
+     Note: Input to the function below must be in a specific order
+        - item_PS
+        - item_alpha
+        - item_attackValue
+        - item_attackCost
+        - item_impact
+        - item_ci
+        - item_cost_maintenance
+        - item_cost_operation
+        - item_scaleAmount
+    '''
+    if debugBit != 1:
+        print("[?] Function Input Breakdown (FIB)..... combineScript::graphToRisk")
+        print("\tGraph PS:\t\t" + str(graphPSList) + "\n\tPath Alpha:\t\t" + str(path_alpha) + "\n\tPath AtkVal:\t\t" + str(path_attackValue) + "\n\tGraph Ca:\t\t" + str(graphAttackCostList) + "\n\tPath Impact:\t\t" + str(path_impact) + "\n\tGraph Ci:\t\t" + str(graphInitCostList) + "\n\tPath Scale:\t\t" + str(path_scaleAmount))
+    pathList_SecurityRisk = []
+    # Loop through each path of items to calculate the security risk per path
+    #   Nota Bene: Expectation is that the size of the lists is the same!! It should be based on how the code is written
+    for subList in range(len(graphPSList)):
+        pathList_SecurityRisk.append(Calculation.securityRisk.pathCostCalc(graphPSList[subList], path_alpha, path_attackValue, graphAttackCostList[subList], path_impact, graphInitCostList[subList], 70000, 2450, path_scaleAmount))  # Ensure that scaling is the SAME!!!
+    print("List of different path security risk values: " + str(pathList_SecurityRisk))
+    # NEED: Next summation of all the path security risk values to obtain the overall security risk
+    return pathList_SecurityRisk
+
+# Function for running the main part of the attack graph evaluation script
+def main():
+    print("[*] ---------- Total Attack Graph Security Calculation Script ------------ [*]")
+    path_scaleAmount = int(input('What is the scale amount for the values being supplied by the user (e.g. 1000): '))
+    
+    print("[!] --------- NEED: Example attack graph to read in ------------ [!]\n\t\t~!~ Generate example from AADL")
+    #testTree = XMLParsing.xmlParsing.readAttackTree('XMLParsing/cs2018Example.attacktree')
+    #testTree = XMLParsing.xmlParsing.readAttackTree('XMLParsing/itDoSCisco.attacktree')
+    testTree = XMLParsing.xmlParsing.readAttackTree('XMLParsing/testData/singleRoot.twoChild.attacktree') # Test for finding two vuln paths to root Node
+    # Run test with multi-tree
+    #testTree = XMLParsing.xmlParsing.readAttackTree('XMLParsing/testData/multiBranch.attacktree')
+    # Get the set of paths to the leafs (e.g. suNodes)
+    testxpath = XMLParsing.xmlParsing.findLeafs(testTree.getroot()[0])  # Passing the rootNode to get all existing leafs
+    '''
+        # Note: the above will return empty if there are NO LEAVES and it is ONLY A ROOT NODE
+    if not testxpath:   # No path to leaves was found, therefore ONLY a root node
+        print("[!] Only a rootNode was present in the provided attack graph")
+        rootOnlyTree = 1
+    else:               # Leaves were found in the attack graph
+        print("[+] Path(s) to leaf nodes have been found")
+        rootOnlyTree = 0
+    # Build the nested list of CVEs
+    if rootOnlyTree:
+        # NOTE: Have to generate a separate path PER entry to the root node (Edge case); in case of [[pathA],[pathB]]
+            # => NOTE BENE: WRONG!!! Only need to produce a product PoS for the root node and perform normal calculation
+        testCVEList = XMLParsing.xmlParsing.grabNodeCVEs(testTree.getroot()[0])
+        testNameList = []
+        testNameList.append(testTree.getroot()[0].get('name'))
+    else:
+    '''
+    testCVEList = XMLParsing.xmlParsing.buildCVEList(testxpath, testTree)   # NOTE: No need for "root paths" since a product of PoS is taken
+    testNameList = XMLParsing.xmlParsing.buildNameList(testxpath, testTree)
+  
+    testPSList = calcPSpath(testCVEList)
+    testInitCostList = getGraphElementsInitCost(testNameList)
+    testAttackCostList = calcAttackCostpath(testCVEList)    #getGraphElementsAttackCost(testCVEList)
+    '''
+    print("[?] --------- Establishing the values to be passed to the CVSS script ------- [?]")
+    cveID = 'CVE-2018-14006'
+    # Clean-up return from the xmlParsing
+    
+    print("\t[*] Grabbing CVSS information.....")
+    testCVSS = APILearning.cveGrab.main(cveID)
+    print("\t-- Got CVSS of: " + str(testCVSS) + "\t\t\tVariable Type: " + str(type(testCVSS)))
+    
+    print("[*] Preparing varaibles to send to security risk script....")
+    print("\tFixing CVSS to scale....")
+    testCVSS = testCVSS/10
+    print("\tNew CVSS: " + str(testCVSS))
+    # NEED: Create a loop for generating the item_PS list for each item
+    #   -> 1st test using a list of CVEs
+    CVEList = ['CVE-2018-14006', 'CVE-2018-14005', 'CVE-2018-14004']
+    cvePS = []  # Note: Need a way to deal with 'place holder' CVE values for scenario when a node has no current CVE ID
+    for cveItem in CVEList:
+        cvePS.append(APILearning.cveGrab.main(cveItem)/10)
+    print("-- Testing cvePS building:\n\tCVEList : " + str(CVEList) + "\n\tcvePS: " + str(cvePS))
+    item_PS = cvePS     # WORKS!!!
+    '''
+
+    # Loop through to pass the different path probabilities to the security risk calculations
+        
+        # Pass the path_PS for each leaf-to-root path to the security risk equation
+
+        # Determine how to pass cost and impact information to the security risk function
+            # Maybe ask the user for informaiton for each piece?
+            #   Note: This qould require that the xpath finding function returns a list of the 'name' for each subnode; this allows for asking each piece value
+            
+            # NEED: Learn how to return TWO separate lists from a function in python
+    # Prepare values for user requests
+    rootNodeTag = testTree.getroot()[0].tag
+    rootNodeName = testTree.getroot()[0].get('name')
+    # Requesting values from the user:
+    path_impact = float(input('What is the impact for ' + str(rootNodeTag) + ' ' + str(rootNodeName) + '(0.0 to 99.9): '))
+    path_attackValue = float(input('What is the attack value for ' + str(rootNodeTag) + ' ' + str(rootNodeName) + '(0.0 to 99.9): '))
+    path_alpha = float(input('What is the alpha value for the attack graph: '))
+
+    # Function call to collect the cost of attack for each vulnerability in the attack graph
+    
+    print("[*] Calling security risk script with varaibles")
+    '''
+     Note: Input to the function below must be in a specific order
+        - item_PS
+        - item_alpha
+        - item_attackValue
+        - item_attackCost
+        - item_impact
+        - item_ci
+        - item_cost_maintenance
+        - item_cost_operation
+        - item_scaleAmount
+    '''
+    #Calculation.securityRisk.main([testCVSS], 1, 20, 7, 11.7, [6000, 13000], 70000, 2450, 1000)
+    #Calculation.securityRisk.main(item_PS, 1, 20, 7, 11.7, [6000, 13000], 70000, 2450, 1000)
+    pathList_SecurityRisk = []
+    # Loop through each path of items to calculate the security risk per path
+    #   Nota Bene: Expectation is that the size of the lists is the same!! It should be based on how the code is written
+    for subList in range(len(testPSList)):
+        # Calculate security risk value for each path based on the provided lists of probabilitiy of success & initial costs for each element
+        #Calculation.securityRisk.main(testPSList[subList], 1, 20, 7, 11.7, testInitCost[subList], 70000, 2450, 1000)  # This call works
+        # Calling the function directly instead of using the main() function
+        pathList_SecurityRisk.append(Calculation.securityRisk.pathCostCalc(testPSList[subList], path_alpha, path_attackValue, testAttackCostList[subList], path_impact, testInitCostList[subList], 70000, 2450, path_scaleAmount))  # Ensure that scaling is the SAME!!!
+        '''
+          NEED:  Write code to perform summation of cost of attacks for vulnerabilities in attack path [Note: similar to prob of success, but summation NOT product]
+            -> Fix to make use of list for calculatsions
+        '''
+    print("List of different path security risk values: " + str(pathList_SecurityRisk))
+    # NEED: Next summation of all the path security risk values to obtain the overall security risk
+
+# Function for running test suite to make sure that the code is still functioning as expected
+#   -> NOTE: This is based on the values calculated during inital code writing and testing
+#       - Directory full of Test Files: TestFiles/
+def sanityTest():
+    print("[*] Running sanity test for ART software....")
+    print("--------------------------------------------")
+    print("\tBeginning test of easyDoS.attacktree")
+    test01 = graphToRisk('TestFiles/easyDoS.attacktree')
+    print("\tBeginning test of easyDoSEdit.attacktree")
+    test02 = graphToRisk('TestFiles/easyDoSEdit.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of easyDoSFixed.attacktree")
+    test03 = graphToRisk('TestFiles/easyDoSFixed.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of threeTreeTest.attacktree")
+    test04 = graphToRisk('TestFiles/threeTreeTest.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of threeTreeTest.var01.attacktree")
+    test05 = graphToRisk('TestFiles/threeTreeTest.var01.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of threeLineTest.attacktree")
+    test06 = graphToRisk('TestFiles/threeLineTest.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of threeLineTest.var01.attacktree")
+    test07 = graphToRisk('TestFiles/threeLineTest.var01.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of threeLineTest.var02.attacktree")
+    test08 = graphToRisk('TestFiles/threeLineTest.var02.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of threeTreeTest.var02.attacktree")
+    test09 = graphToRisk('TestFiles/threeTreeTest.var02.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of fourYTest.attacktree")
+    test10 = graphToRisk('TestFiles/fourYTest.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of fourYTest.var01.attacktree")
+    test11 = graphToRisk('TestFiles/fourYTest.var01.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of fourYTest.var02.attacktree")
+    test12 = graphToRisk('TestFiles/fourYTest.var02.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of fiveTreeTest.attacktree")
+    test13 = graphToRisk('TestFiles/fiveTreeTest.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of fiveTreeTest.var01.attacktree")
+    test14 = graphToRisk('TestFiles/fiveTreeTest.var01.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of fiveTreeTest.var02.attacktree")
+    test15 = graphToRisk('TestFiles/fiveTreeTest.var02.attacktree')
+    print("--------------------------------------------")
+    print("\tBeginning test of fiveTreeTest.var03.attacktree")
+    test16 = graphToRisk('TestFiles/fiveTreeTest.var03.attacktree')
+    print("--------------------------------------------")
+    print("[*] Printing findings from sanity testing:")
+    print("\tTest 01:\t" + str(test01))
+    print("\tTest 02:\t" + str(test02))
+    print("\tTest 03:\t" + str(test03))
+    print("\tTest 04:\t" + str(test04))
+    print("\tTest 05:\t" + str(test05))
+    print("\tTest 06:\t" + str(test06))
+    print("\tTest 07:\t" + str(test07))
+    print("\tTest 08:\t" + str(test08))
+    print("\tTest 09:\t" + str(test09))
+    print("\tTest 10:\t" + str(test10))
+    print("\tTest 11:\t" + str(test11))
+    print("\tTest 12:\t" + str(test12))
+    print("\tTest 13:\t" + str(test13))
+    print("\tTest 14:\t" + str(test14))
+    print("\tTest 15:\t" + str(test15))
+    print("\tTest 16:\t" + str(test16))
+    print("[*] Completed sanity test for ART software")
+
+# Function that allows this script to be imported without automatically running the main function
+if __name__ == "__main__":
+    main()

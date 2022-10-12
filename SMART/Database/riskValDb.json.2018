@@ -1,0 +1,574 @@
+{
+	"CVE-2018-0020": {
+		"Probability of Success": "0.78",
+		"Cost of Attack": "3.5"
+	},
+	"CVE-2018-0009": {
+		"Probability of Success": "0.43",
+		"Cost of Attack": "6"
+	},
+	"CVE-2018-0101": {
+		"Probability of Success": "1.0",
+		"Cost of Attack": "5.6"
+	},
+	"CVE-2017-7494": {
+		"Probability of Success": "1.0",
+		"Cost of Attack": "2"
+	},
+	"CVE-2018-0018": {
+		"Probability of Success": "0.43",
+		"Cost of Attack": "1"
+	},
+	"CVE-2008-2333": {
+		"Probability of Success": "0.43",
+		"Cost of Attack": "2"
+	},
+	"CVE-2006-3885": {
+		"Probability of Success": "0.50",
+		"Cost of Attack": "1"
+	},
+	"CVE-2015-0760": {
+		"Probability of Success": "N/A",
+		"Cost of Attack": "2.5"
+	},
+	"CVE-2018-7251": {
+		"Probability of Success": "9.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-6617": {
+		"Probability of Success": "7.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-6521": {
+		"Probability of Success": "9.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3754": {
+		"Probability of Success": "8.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3286": {
+		"Probability of Success": "4.3",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3285": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3284": {
+		"Probability of Success": "4.4",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3283": {
+		"Probability of Success": "4.4",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3282": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3280": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3279": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3278": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3277": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3276": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3258": {
+		"Probability of Success": "8.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3251": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3247": {
+		"Probability of Success": "5.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3212": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3203": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3200": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3195": {
+		"Probability of Success": "5.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3187": {
+		"Probability of Success": "5.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3186": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3185": {
+		"Probability of Success": "5.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3182": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3174": {
+		"Probability of Success": "5.3",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3173": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3171": {
+		"Probability of Success": "5.0",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3170": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3162": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3161": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3156": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3155": {
+		"Probability of Success": "7.7",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3145": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3144": {
+		"Probability of Success": "5.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3143": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3137": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3133": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3123": {
+		"Probability of Success": "5.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3084": {
+		"Probability of Success": "2.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3082": {
+		"Probability of Success": "2.7",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3081": {
+		"Probability of Success": "5.0",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3080": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3079": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3078": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3077": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3075": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3074": {
+		"Probability of Success": "5.3",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3073": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3071": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3070": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3067": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3066": {
+		"Probability of Success": "3.3",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3065": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3064": {
+		"Probability of Success": "7.1",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3063": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3062": {
+		"Probability of Success": "5.3",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3061": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3060": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3058": {
+		"Probability of Success": "4.3",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3056": {
+		"Probability of Success": "4.3",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-3054": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2877": {
+		"Probability of Success": "5.0",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2846": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2839": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2819": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2818": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2817": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2816": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2813": {
+		"Probability of Success": "4.3",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2812": {
+		"Probability of Success": "5.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2810": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2805": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2787": {
+		"Probability of Success": "5.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2786": {
+		"Probability of Success": "5.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2784": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2782": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2781": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2780": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2779": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2778": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2777": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2776": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2775": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2773": {
+		"Probability of Success": "4.1",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2771": {
+		"Probability of Success": "4.4",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2769": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2767": {
+		"Probability of Success": "3.1",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2766": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2762": {
+		"Probability of Success": "4.4",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2761": {
+		"Probability of Success": "5.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2759": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2758": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2755": {
+		"Probability of Success": "7.7",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2703": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2696": {
+		"Probability of Success": "7.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2668": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2667": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2665": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2647": {
+		"Probability of Success": "5.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2646": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2645": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2640": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2622": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2612": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2600": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2598": {
+		"Probability of Success": "3.7",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2591": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2590": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2586": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2585": {
+		"Probability of Success": "7.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2583": {
+		"Probability of Success": "6.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2576": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2573": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2565": {
+		"Probability of Success": "4.9",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-2562": {
+		"Probability of Success": "7.1",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-19654": {
+		"Probability of Success": "7.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-19328": {
+		"Probability of Success": "9.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-19222": {
+		"Probability of Success": "9.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-18476": {
+		"Probability of Success": "9.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-17957": {
+		"Probability of Success": "7.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-17035": {
+		"Probability of Success": "9.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-17034": {
+		"Probability of Success": "6.1",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-15768": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-15719": {
+		"Probability of Success": "9.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-14704": {
+		"Probability of Success": "6.1",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-14703": {
+		"Probability of Success": "9.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-14700": {
+		"Probability of Success": "7.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-14696": {
+		"Probability of Success": "7.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-14695": {
+		"Probability of Success": "7.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-14669": {
+		"Probability of Success": "7.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-11414": {
+		"Probability of Success": "8.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-11413": {
+		"Probability of Success": "6.5",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-11309": {
+		"Probability of Success": "9.8",
+		"Cost of Attack": "2.0"
+	},
+	"CVE-2018-10757": {
+		"Probability of Success": "9.8",
+		"Cost of Attack": "2.0"
+	}
+}

@@ -1,0 +1,167 @@
+The following is the plan for combining the operaiton of TAMSAT and SMART to
+go from Model -> 2 -> Security Risk Value
+
+1) Create and feed in an AADL model file into TAMSAT
+	i) One file that uses a SimpleDB Database
+	ii) One file that uses a MySQL Database
+	- Note: This degree of information will need to come from the component name
+2) TAMSAT tool figures out entry + exits points as well as generates attack tree
+	- Note: Need to have the necessary information placed within the TAMSAT databases
+3) Feed the generated attack tree into SMART to determine security risk value
+	- Note: Need to have the necessary information placed within the SMART database
+4) Compare values generated to determine less risky file
+	-> Should be comparing two security risk values with identification of the corrseponding model
+
+============================================
+	GLOBAL VALUES FOR USER RUN
+============================================
+Probability of Success (Ps):
+	-> Nota Bene: This value will come from the appropriate CVE by default, BUT user-defined values are possible
+		-> Note: These would most likely be scaled relative to all solutions available
+
+Alpha:
+	- Assumed to be 1 for ease in calculations:										1
+		-> Note: Can change, but assumed to this value
+
+Attack Value (A):
+	- Value of the Asset of Importance (AoI) to the attacker (Note: scaled value):						20
+	- Value of a Database Server AoI to an attacker:									20
+	- Value of a MySQL Server AoI to an attacker:										20
+	- Value of a MongoDB Server AoI to an attacker:										20
+	- Value of a CouchDB Server AoI to an attacker:										20
+
+Cost of Attack (Ca):
+	- Cost to a malicious actor to perform a successful attack (e.g. access to AoI; general):				7
+	- Cost to attack a firewall for Firewall Bypass (i.e. CVE-2018-0009):							8.0
+	- Cost to attack a firewall for Denial of Services (i.e. CVE-2018-0020):						5.5 || 6
+	- Cost to attack using CVE-2018-0101:											5.6 || 3.5
+	- Cost to attack using CVE-2017-7494:											2
+	- Cost to attack using CVE-2018-0018:											1
+	- Cost to attack using CVE-2008-2333:											2
+	- Cost to attack using CVE-2006-3885:											1
+	- Cost to attack using CVE-2015-0760:											2.5
+	- Cost to attack using CVE-2014-0001:											2
+	- Cost to attack using CVE-2013-3969:											2
+	- Cost to attack using CVE-2018-11769:											2
+
+Impact (I):
+	- Impact of a successfull attack; coming from previous assumption of impact (Note: scaled value):			11.7
+	- Impact of a successful attack on a Database Server:									11.7
+	- Impact of a successful attack on a MySQL Server:									11.7
+	- Impact of a successful attack on a MongoDB Server:									11.7
+	- Impact of a successful attack on a CouchDB Server:									11.7
+
+Cost of Implementation (Ci):
+	- Cost of implementing a Database Server:										3000 || 10000
+	- Cost of implementing an Internal Firewall:										12000
+	- Cost of implementing an External Firewall:										8000
+	- Cost of implementing a Web Server:											10000 || 7000
+	- Cost of implementing a VPN Solution:											22000
+		-> Note: Comes from approximation from online shopping for enterprise solutions
+	- Cost of implementing a Router:											6000
+	- Cost of implementing a Web Server Database:										13000
+	- Cost of implementing a Third Party Application:									20000
+	- Cost of implementing an SSH Gateway:											2000
+	- Cost of implementing a Local Employee Computer:									3000
+	- Cost of implementing a MySQL Server:											5000
+		-> Note: Comes from approximation of Annual Subscription, Support, & Maintainence
+	- Cost of implementing a MongoDB Server:										6500
+		-> Note: Comes from approximation of MongoDB Enterprise Core; Advanced is priced higher (10k)
+	- Cost of implementing a CouchDB Server:										2500
+
+Cost of Maintainence (Cm):
+	- Cost for maintaining a given device/system; assumed to be approximate cost of a dedicated employee:			70000
+	- Cost for maintaining an SSH Gateway:											1500
+	- Cost for maintaining a Local Employee Computer:									1000
+	- Cost for maintaining a Firewall:											2000
+	- Cost for maintaining a Databaes Server:										1000
+	- Cost for maintaining a Web Server:											1500
+	- Cost for maintaining a MySQL Server:											
+	- Cost for maintaining a MongoDB Server:										
+	- Cost for maintaining a CouchDB Server:										
+
+Cost of Operation (Co):
+	- Cost for using/operating a given device; assumed flat for all as a general electrical cost:				2450
+	- Cost for using/operating an SSH Gateway:										110
+	- Cost for using/operating a Local Employee Computer:									120
+	- Cost for using/operating a Firewall:											130
+	- Cost for using/operating a Database Server:										100
+	- Cost for using/operating a Web Server:										115
+	- Cost for using/operating a MySQL Server:										
+	- Cost for using/operating a MongoDB Server:										
+	- Cost for using/operating a CouchDB Server:										
+
+Scale Amount:
+	- Assumed to be 1000 for equating values between the risk caluclation (0-99.0) and cost values:				1000
+		-> Nota Bene: Alteration of risk calculation can fix this neeed (Bug Waldemar)
+
+============================================
+		Coding Process
+============================================
+TAMSAT Piece:
+i) TAMSAT takes in two variables												[x]
+	a) Location + Name of AADL Model File	(e.g. <location>/<file>.aadl)							[x]
+	b) Location of the output generated attack tree										[x]
+ii) Output a sanity check of the path found from entry to exit									[ ]
+	-> Note: This will most likely happen after the code asks the user for the Asset of Importance (AoI)
+iii) Fix vulnerability database to:												[x]
+	a) Look for a specific database file											[x]
+		-> If not found, move on to next step
+	b) Generate a basic vulnerability database file if no previous one exists						[x]
+		-> ENSURE that this gets done in a pre-determined locaiton
+iv) TAMSAT takes in the PROVIDED output .attacktree file INSTEAD of using the default (generated.attacktree) file		[x]
+	a) (Optional) Have TAMSAT confirm the location with the user prior							[ ]
+
+
+SMART Piece:
+i) SMART takes in two variables													[ ]
+	a) Location + Name of Attack Tree File	(e.g. <location>/<file>.attacktree)						[x]
+	b) Location of the output security risk value for the corresponding attack tree						[ ]
+ii) Add input by user for cost values (and other assumptions) to the security risk calculation					[ ]
+	a) Will need to check for scenario when provided vs when not								[ ]
+		-> Note: May be able to skip for now assuming same structure as original SMART paper
+			- Just make sure that the software solution (SimpleDB vs MySQL) give a different CVE/security score raiting
+
+Combination:
+i) Wirte Python script to bring together the two pieces										[N]
+	- Re-do in bash script (due to issues using Python)									[x]
+ii) Pass input and get output													[x]
+	-> Note: Want to see output from EACH piece (TAMSAT + SMART)								[n?]
+iii) Create two AADL model files												[x]
+	a) Follow outline of ideas from notebook										[x]
+	-> Note: These should only really differ by one key piece
+iv) Run TAMSAT + SMART with each model												[x]
+	a) Determine 'universal' values for each piece of model (for SMART input)						[x]
+		-> Note: Should come from previous runs of the tool
+	b) Ensure output for each happens in clear and easy to understand manner						[x]
+	c) (Bonus) Allow feeding of BOTH model files at the same time								[ ]
+	d) (Bonus+) Have output shown side-by-side (expecting Python trouble here)						[ ]
+	e) Write vulnerability JSON database for the mysql and simpleDB database solutions					[x]
+		-> Note: Could give each a different CVE
+v) Compare differences between outputs												[ ]
+
+============================================
+		ISSUES
+============================================
+[ ] Can NOT call nested python files due to error about not being able to find modules
+	- Would these be sub-modules?
+	[N] Rename all calls to modules to use relative paths???
+	- Added sys.path for the directories
+	[X] Issues with file paths + names		<---- Fixed!
+		- Set all paths to relative
+	[x] Re-write as a bash script that calls the python elements
+[x] Error with SMART due to python complaining that 'lxml' module can not be found	<---- Fixed!
+	-> Install on system (python-lxml)
+	[x] Update Arch linux first....
+TAMSAT
+	[x] Attack tree generated into the current running directory
+	[x] generatedVulns.json
+	[x] Fix verbosity output
+		[x] Note: Figure out how to pass a NEW value for debugBit to python
+			- Base this on flags given to the bash script?
+			-> Note: TAMSAT tool should allow passing of "-v" OR "--verbose" flag to the function
+
+=====
+Example Usages
+=====
+./model2risk.sh SMART/TestFiles/easyDoS.attacktree something.txt		<----- Testing general run through

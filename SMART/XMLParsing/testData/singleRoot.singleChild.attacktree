@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attacktree:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:attacktree="http://www.example.org/attacktree" name="MedicalDevice02" description="Editted Model of a Compromised Medical Device">
+  <rootNode name="Web Server">
+	<vulnerabilities name="CVE-2018-1000153" description="A cross-site request forgery vulnerability exists in Jenkins vSphere Plugin 2.16 and older in Clone.java, CloudSelectorParameter.java, ConverToTemplate.java, ConvertToVm.java, Delete.java, DeleteSnapshot.java, Deply.java, ExposeGuestInfo.java, FolderVSphereCloudPrperty.java, PowerOff.java, PowerOn.java, Reconfigure.java, Rename.java, RenameSnapshot.java, RevertToSnapshot.java, SuspendVm.java, TakeSnapshot.java, VSphereBuildStepContainer.java, vSphereCloudProvisionedSlave.java, vSphereCouldSlave.java, vSphereCouldSlaveTemplate.java..... that allows attackers to perform form validation related actions, including sending numerous requests to the configured vSphere server, potentially resulting in denial of service, or send credentials stored in Jenkins with known ID to an attacker-specified server ('test connection')"/>
+	<subNodes name="Database Server">
+		<vulnerabilities name="CVE-2018-1000032" description="A heap-based buffer overflow exists in Info-Zip UnZip version 6.10c22 that allows an attacker to perform a denial of service or to possibly achieve code execution."/>
+	</subNodes>
+  </rootNode>
+</attacktree:Model>

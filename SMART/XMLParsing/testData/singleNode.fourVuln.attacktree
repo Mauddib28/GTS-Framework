@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attacktree:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:attacktree="http://www.example.org/attacktree" name="MedicalDevice02" description="Editted Model of a Compromised Medical Device">
+  <rootNode name="Database Server">
+	  <vulnerabilities name="CVE-2018-1000032" description="A heap-based buffer overflow exists in Info-Zip UnZip version 6.10c22 that allows an attacker to perform a denial of service or to possibly achieve code execution."/>
+	  <vulnerabilities name="CVE-2018-1000039" description="In MuPDF 1.12.0 and earlier, multuple heap use after free bugs in the PDF parase could allow an attacker to execute arbitrary code, read memory, or cause a denial of service via a crafter file."/>
+	  <vulnerabilities name="CVE-2018-1000168" description="nghttp2 version &gt;= 1.10.0 and nghttp2 &lt;= v1.31.0 contains an Improper Input Valdidation CWE-20 vulnerability in ALTSVC frame handling that can result in segmentation fault leading to denial of service.  This attack appears to be exploitable via network client.  This vulnerability appears to have been fixed in &gt;= 1.31.1"/>
+	  <vulnerabilities name="CVE-2018-1000301" description="curl version 7.20.0 to and including culr 7.59.0 contains a CWE-126: Buffer Over-read vulnerability in denial of service that can result in curl can be tricked into reading data beyond the end of a heap based buffer used to store downloaded RTSP content.  This vulnerabilitiy appears to have been fixed in curl &lt; 7.20.0 and curl &gt;= 7.60.0."/>
+  </rootNode>
+</attacktree:Model>

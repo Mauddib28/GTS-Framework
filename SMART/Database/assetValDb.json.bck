@@ -1,0 +1,8 @@
+{
+	"Database Server": {
+		"Impact": "11.7",
+		"Attacker Value": "20",
+		"Alpha": "1",
+		"Scale Amount": "1000"
+	}
+}

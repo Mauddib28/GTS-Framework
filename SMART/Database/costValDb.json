@@ -1,0 +1,182 @@
+{
+	"SSH Gateway": {
+		"Cost of Initialization": "2000",
+		"Cost of Maintainence": "1500",
+		"Cost of Operation": "110"
+	},
+	"Local Employee Computer": {
+		"Cost of Initialization": "3000",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "120"
+	},
+	"Firewall": {
+		"Cost of Initialization": "8000",
+		"Cost of Maintainence": "2000",
+		"Cost of Operation": "130"
+	},
+	"firewall": {
+		"Cost of Initialization": "8000",
+		"Cost of Maintainence": "2000",
+		"Cost of Operation": "130"
+	},
+	"cisco": {
+		"Cost of Initialization": "8000",
+		"Cost of Maintainence": "2000",
+		"Cost of Operation": "130"
+	},
+	"barracuda": {
+		"Cost of Initialization": "8000",
+		"Cost of Maintainence": "2000",
+		"Cost of Operation": "130"
+	},
+	"fortinet": {
+		"Cost of Initialization": "8000",
+		"Cost of Maintainence": "2000",
+		"Cost of Operation": "130"
+	},
+	"juniper": {
+		"Cost of Initialization": "8000",
+		"Cost of Maintainence": "2000",
+		"Cost of Operation": "130"
+	},
+	"meraki": {
+		"Cost of Initialization": "8000",
+		"Cost of Maintainence": "2000",
+		"Cost of Operation": "130"
+	},
+	"pfsense": {
+		"Cost of Initialization": "8000",
+		"Cost of Maintainence": "2000",
+		"Cost of Operation": "130"
+	},
+	"sophos": {
+		"Cost of Initialization": "8000",
+		"Cost of Maintainence": "2000",
+		"Cost of Operation": "130"
+	},
+	"sonicwall": {
+		"Cost of Initialization": "8000",
+		"Cost of Maintainence": "2000",
+		"Cost of Operation": "130"
+	},
+	"Database Server": {
+		"Cost of Initialization": "5000",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"mysql": {
+		"Cost of Initialization": "5000",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"mongodb": {
+		"Cost of Initialization": "6500",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"couchdb": {
+		"Cost of Initialization": "2500",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"oracle_database": {
+		"Cost of Initialization": "2418",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"mysql_database": {
+		"Cost of Initialization": "5000",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"generic_database": {
+		"Cost of Initialization": "5000",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"generic_sensor": {
+		"Cost of Initialization": "750",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"light_sensor": {
+		"Cost of Initialization": "200",
+		"Cost of Maintainence": "500",
+		"Cost of Operation": "120"
+	},
+	"water_sensor": {
+		"Cost of Initialization": "200",
+		"Cost of Maintainence": "500",
+		"Cost of Operation": "120"
+	},
+	"motion_sensor": {
+		"Cost of Initialization": "200",
+		"Cost of Maintainence": "500",
+		"Cost of Operation": "120"
+	},
+	"breez_sensor": {
+		"Cost of Initialization": "400",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"generic_graphical_user_interface": {
+		"Cost of Initialization": "750",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"generic_application": {
+		"Cost of Initialization": "1000",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"generic_server": {
+		"Cost of Initialization": "2500",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"breez_server": {
+		"Cost of Initialization": "2500",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"zigbee_server": {
+		"Cost of Initialization": "2500",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"intel_server": {
+		"Cost of Initialization": "2108",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "1200"
+	},
+	"intel_breez_server": {
+		"Cost of Initialization": "2108",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "1200"
+	},
+	"intel_zigbee_server": {
+		"Cost of Initialization": "2108",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "1200"
+	},
+	"aspeed_server": {
+		"Cost of Initialization": "1067",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "1200"
+	},
+	"aspeed_breez_server": {
+		"Cost of Initialization": "1067",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "1200"
+	},
+	"aspeed_zigbee_server": {
+		"Cost of Initialization": "1067",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "1200"
+	},
+	"Web Server": {
+		"Cost of Initialization": "7000",
+		"Cost of Maintainence": "1500",
+		"Cost of Operation": "115"
+	}
+}

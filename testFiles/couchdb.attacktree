@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attacktree:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:attacktree="http://www.example.org/attacktree" name="generatedAttackTree" description="Attack tree generated based on provided AADL model that was parsed">
+ <rootNode name="couchdb">
+  <vulnerabilities name="CVE-2018-11769" description="Code execution and privilege bypass"/>
+  <subNodes name="firewall">
+   <vulnerabilities name="CVE-2018-0009" description="Firewall bypass"/>
+   <vulnerabilities name="CVE-2018-0020" description="Denial of Service vulnerability condition"/>
+  </subNodes>
+ </rootNode>
+</attacktree:Model>

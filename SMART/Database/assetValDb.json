@@ -1,0 +1,45 @@
+{
+	"Database Server": {
+		"Impact": "11.7",
+		"Attacker Value": "20",
+		"Alpha": "1",
+		"Scale Amount": "1000"
+	},
+	"mysql": {
+		"Impact": "19.36",
+		"Attacker Value": "11.6",
+		"Alpha": "1",
+		"Scale Amount": "1000"
+	},
+	"mongodb": {
+		"Impact": "19.36",
+		"Attacker Value": "11.6",
+		"Alpha": "1",
+		"Scale Amount": "1000"
+	},
+	"couchdb": {
+		"Impact": "19.36",
+		"Attacker Value": "11.6",
+		"Alpha": "1",
+		"Scale Amount": "1000"
+	},
+	"oracle_database": {
+		"Impact": "19.36",
+		"Attacker Value": "11.6",
+		"Alpha": "1",
+		"Scale Amount": "1000"
+	},
+	"mysql_database": {
+		"Impact": "19.36",
+		"Attacker Value": "11.6",
+		"Alpha": "1",
+		"Scale Amount": "1000"
+	},
+	"generic_database": {
+		"Impact": "19.36",
+		"Attacker Value": "11.6",
+		"Alpha": "1",
+		"Scale Amount": "1000"
+	}
+
+}

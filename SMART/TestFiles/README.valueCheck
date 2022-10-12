@@ -1,0 +1,233 @@
+Example Test File Names with Accopanying Information
+
+01 Test Name:			easyDoS.attacktree
+	Node Complexity:		NC-2N1B2L
+	Vuln Complexity:		VC-3V2B2L
+	CVEs Present:			CVE-2018-0020, CVE-2018-0009, CVE-2017-7494
+	Node Elements:			Firewall, Database Server
+	Expected SR:			[101845.55376678996]
+	Last Calculated SR:		[101845.55376678996]
+
+02 Test Name:			easyDoSEdit.attacktree
+	Node Complexity:		NC-2N1B1L
+	Vuln Complexity:		VC-2V1B1L
+	CVEs Present:			CVE-2018-0020, CVE-2017-7494
+	Node Elements:			Firewall, Database Server
+	Expected SR:			[99575.62510797901]
+	Last Calculated SR:		[99575.62510797901]
+
+03 Test Name:			easyDoSFixed.attacktree
+	Node Complexity:		NC-2N1B1L
+	Vuln Complexity:		VC-2V1B1L
+	CVEs Present:			CVE-2018-0009, CVE-2017-7494
+	Node Elements:			Firewall, Database Server
+	Expected SR:			[92719.92865881095]
+	Last Calculated SR:		[92719.92865881095]
+
+04 Test Name:			threeTreeTest.attacktree
+	Node Complexity:		NC-3N2B2L
+	Vuln Complexity:		VC-4V3B3L
+	CVEs Present:			CVE-2018-0020, CVE-2018-0009, CVE-2018-0101, CVE-2017-7494
+	Node Elements:			Firewall, Local Employee Computer, Database Server
+	Expected SR:			[101845.55376678996, 97149.95181251212]
+	Last Calculated SR:		[101845.55376678996, 97149.95181251212]
+
+05 Test Name:			threeTreeTest.var01.attacktree
+	Node Complexity:		NC-3N2B2L
+	Vuln Complexity:		VC-4V2B2L
+	CVEs Present:			CVE-2018-0009, CVE-2018-0101, CVE-2017-7494
+	Node Elements:			Firewall, Local Employee Computer, Database Server
+	Expected SR:			[92719.92865881095, 97149.95181251212]
+	Last Calculated SR:		[92719.92865881095, 97149.95181251212]
+
+06 Test Name:			threeLineTest.attacktree
+	Node Complexity:		NC-3N1B1L
+	Vuln Complexity:		VC-4V2B2L
+	CVEs Present:			CVE-2018-0020, CVE-2018-0009, CVE-2018-0101, CVE-2017-7494
+	Node Elements:			Firewall, SSH Gateway, Database Server
+	Expected SR:			[101474.619297592]
+	Last Calculated SR:		[101474.619297592]
+	=> Note: Concern that the Sum of Ca causing issues
+		- Should NOT be an issue since {Ps * A !>= Ca} = {0} check already tested that it works correctly
+
+07 Test Name:			threeLineTest.var01.attacktree
+	Node Complexity:		NC-3N1B1L
+	Vuln Complexity:		VC-3V1B1L
+	CVEs Present:			CVE-2018-0009, CVE-2018-0101, CVE-2017-7494
+	Node Elements:			Firewall, SSH Gateway, Database Server
+	Expected SR:			[92450.0]
+	Last Calculated SR:		[92450.0]
+
+08 Test Name:			threeLineTest.var02.attacktree
+	Node Complexity:		NC-3N1B1L
+	Vuln Complexity:		VC-7V5B5L
+	CVEs Present:			CVE-2018-0020, CVE-2018-0009, CVE-2018-0018, CVE-2008-2333, CVE-2006-3885, CVE-2018-0101, CVE-2017-7494
+	Node Elements:			Firewall, SSH Gateway, Database Server
+	Expected SR:			[105882.0270585336]
+	Last Calculated SR:		[105882.0270585336]
+
+09 Test Name:			threeTreeTest.var02.attacktree
+	Node Complexity:		NC-3N2B2L
+	Vuln Complexity:		VC-6V5B5L
+	CVEs Present:			CVE-2018-0020, CVE-2018-0009, CVE-2018-0018, CVE-2008-2333, CVE-2006-3885, CVE-2018-0101, CVE-2017-7494
+	Node Elements:			Firewall, Local Employee Computer, Database Servee
+	Expected SR:			[101845.55376678996, 107975.04651738238]
+	Last Calculated SR:		[101845.55376678996, 107975.04651738238]
+
+10 Test Name:			fourYTest.attacktree
+	Node Complexity:		NC-4N2B2L
+	Vuln Complexity:		VC-5V3B3L
+	CVEs Present:			CVE-2018-0020, CVE-2018-0009, CVE-2018-0018, CVE-2018-0101, CVE-2017-7494
+	Node Elements:			Firewall, SSH Gateway, Local Employee Computer, Database Server
+	Expected SR:			[102474.619297592, 87450.0]
+	Last Calculated SR:		[102474.619297592, 87450.0]
+
+11 Test Name:			fourYTest.var01.attacktree
+	Node Complexity:		NC-4N2B2L
+	Vuln Complexity:		VC-4V2B2L
+	CVEs Present:			CVE-2018-0009, CVE-2018-0018, CVE-2018-0101, CVE-2017-7494
+	Node Elements:			Firewall, SSH Gateway, Local Employee Computer, Database Server
+	Expected SR:			[93450.0, 87450.0]
+	Last Calculated SR:		[93450.0, 87450.0]
+
+12 Test Name:			fourYTest.var02.attacktree
+	Node Complexity:		NC-4N2B2L
+	Vuln Complexity:		VC-7V5B5L
+	CVEs Present:			CVE-2018-0020, CVE-2018-0009, CVE-2018-0018, CVE-2018-0101, CVE-2017-7494, CVE-2008-2333, CVE-2006-3885
+	Node Elements:			Firewall, SSH Gateway, Local Employee Computer, Database Server
+	Expected SR:			[102474.619297592, 91857.4077609416]
+	Last Calculated SR:		[102474.619297592, 91857.4077609416]
+
+13 Test Name:			fiveTreeTest.attacktree
+	Node Complexity:		NC-5N3B3L
+	Vuln Complexity:		VC-6V4B4L
+	CVEs Present:			CVE-2018-0020, CVE-2018-0009, CVE-2018-0018, CVE-2018-0101, CVE-2015-0760, CVE-2017-7494
+	Node Elements:			Firewall, SSH Gateway, Local Employee Computer, Web Server, Database Server
+	Expected SR:			[102474.619297592, 87450.0, 93988.67624558356]
+	Last Calculated SR:		[102474.619297592, 87450.0, 93988.67624558356]
+
+14 Test Name:			fiveTreeTest.var01.attacktree
+	Node Complexity:		NC-5N3B3L
+	Vuln Complexity:		VC-5V3B3L
+	CVEs Present:			CVE-2018-0009, CVE-2018-0018, CVE-2018-0101, CVE-2015-0760, CVE-2017-7494
+	Node Elements:			Firewall, SSH Gateway, Local Employee Computer, Web Server, Database Server
+	Expected SR:			[93450.0, 87450.0, 93988.67624558356]
+	Last Calculated SR:		[93450.0, 87450.0, 93988.67624558356]
+
+15 Test Name:			fiveTreeTest.var02.attacktree
+	Node Complexity:		NC-5N3B3L
+	Vuln Complexity:		VC-7V5B5L
+	CVEs Present:			CVE-2018-0020, CVE-2018-0009, CVE-2018-0018, CVE-2018-0101, CVE-2015-0760, CVE-2017-7494, CVE-2006-3885
+	Node Elements:			Firewall, SSH Gateway, Local Employee Computer, Web Server, Database Server
+	Expected SR:			[102474.619297592, 87450.0, 99833.34173608506]
+	Last Calculated SR:		[102474.619297592, 87450.0, 99833.34173608506]
+
+16 Test Name:			fiveTreeTest.var03.attacktree
+	Node Complexity:		NC-5N3B3L
+	Vuln Complexity:		VC-7V5B3L
+	CVEs Present:			CVE-2018-0020, CVE-2018-0009, CVE-2018-0018, CVE-2018-0101, CVE-2015-0760, CVE-2017-7494, CVE-2006-3885
+	Node Elements:			Firewall, SSH Gateway, Local Employee Computer, Web Server, Database Server
+	Expected SR:			[105794.0567259778, 88101.97176587513, 93988.67624558356]
+	Last Calculated SR:		[105794.0567259778, 88101.97176587513, 93988.67624558356]
+
+
+-------------- Example Format for Ledger ------------------
+XX Test Name:			<file name>
+	Node Complexity:		
+	Vuln Complexity:		
+	CVEs Present:			
+	Node Elements:			
+	Expected SR:			
+	Last Calculated SR:		
+
+============================================================
+		IMPORTANT NOTES ABOUT TEST
+============================================================
+All "Cost of Attack" values are ASSUMED!!
+	- Requires propiatory information from user using this tool
+Ideally want the sanityTest() function to update the "Last Calculated SR:" field for each test
+
+NOTE: The Cm and Co values are FIXED @ this point
+
+------------------------------------------------------------
+	Graphical Representation of Test Files
+------------------------------------------------------------
+
+easyDoS.attacktree:
+                        Root
+                         | \
+                         |  \
+                         |   \
+                        subN  \
+                       / |    CVE
+                     /   |
+                   /     |
+                CVE     CVE
+
+
+easyDoSEdit.attacktree/easyDoSFixed.attacktree:
+                        Root
+                         | \
+                         |  \
+                         |   \
+                        subN  \
+                         |    CVE
+                         |
+                         |
+                        CVE
+
+threeTreeTest.attacktree:
+			Root----CVE
+			/ \
+		      /     \
+		     /        \
+		   subN       subN
+		   / |          |
+		 /   |          |
+	        /    |          |
+	      CVE   CVE	       CVE
+
+threeLineTest.attacktree:
+			Root
+			 |  \
+			 |    \
+			 |     \
+			CVE    subN
+				| \
+				|   \
+				|    \
+			       CVE   subN
+			       	      | \
+				      |  \
+				      |   \
+				     CVE   CVE
+
+fourYTest.attacktree:
+			Root
+			 |  \
+			 |    \
+			 |     \
+			CVE    subN
+			       /  \
+			      /    \
+			     /      \
+			   subN     subN
+			   / |        |
+			  /  |        |
+			 /   |        |
+			CVE CVE      CVE
+
+fiveTreeTest.attacktree:
+			Root
+			/  \
+		      /      \
+		     /         \
+		   subN       subN
+		    |           | \
+		    |           |   \ 
+		    |           |    \
+		   CVE        subN   subN
+		              / |     |
+			    /   |     |
+			   /    |     |
+			 CVE   CVE   CVE

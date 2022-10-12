@@ -1,0 +1,53 @@
+The following is the development plan for the translation from a system model (AADL, UML, SysML) into an attack tree XML format:
+
+------------------------- Basic Goals -------------------------
+[ ] Create script/tool for generating attack trees based on a 'bare bones' model
+	- Use AADL to create the simple model
+	- [ ] Create a basic input file that contains information about the different elements that are connected in the connection graph
+		- Include:
+			- [ ] Name of elements
+			- [ ] Description of the element
+				-> Include version information here?
+	- [ ] Tool should be able to determine:
+		-> Where are the enteries to the model?
+		-> Where are the end points of the model?
+		-> What are the connections that exist within the attack graph?
+	- [ ] Track the current nesting level	[WILL BE NEEDED TO ENSURE CONNECTIONS ARE CORRECT]
+	=> [ ] Begin with a basic example AADL file		[DO THE easyDoS EXAMPLE]
+		- [ ] Can the tool read in the example AADL file?
+		- [ ] Does the tool determine the correct entry point(s)
+		- [ ] Does the tool determine the correct exit point(s)
+		- [ ] Does the tool generate the correct attack tree
+[ ] Create database of known vulnerabilities
+	- Include:
+		- [ ] Name of vulnerability
+		- [ ] Type of device(s) that would contain this vulnerability
+			-> Include version information that is affected by vulnerability (e.g. v1.9 - v3.2.e)
+				-> NOTE: May not have/know this information
+		- [ ] Description of vulnerability
+[ ] Create a known/recognized elements database
+	- Include:
+		- [ ] Name of elements
+		- [ ] Known/Expected vulnerabilities of the element
+			- Ex: Anytime a 'Web Server'/'Server' item is seem then the 'SSH Key' vulnerability should always be attached to it
+		- [ ] Version(s)/Variation(s) of the element
+			-> NOTE: Different versions/variations will have different known vulnerabilities attached to it
+[ ] Use the vulnerability databaes and element database to generate attack trees based on USER INPUT
+	- [ ] Recognize each element within the original system model file (AADL, UML, SysML)
+	- [ ] Generate the appropriate rootNode/subNode tag for each element
+		- [ ] Generate the appropriate vulnerabilities tag for each element
+	- [ ] Nest together multiple elements to form a path to the root node
+		-> NOTE: This gets us to the point where a skeleton attack tree is made
+
+------------------------- Version 2.0 Goals -------------------------
+
+[ ] Incorporate in-out ports
+	- Allow for clean determination of attack paths via enhance path findings and tree building
+[ ] Provide option to request different databases based on expectations of model
+	- This is like a pre-cursor to constraint application to the problem at hand
+[ ] Pass output that states what Asset of Importance (AoI) was used to produce the attack tree
+	- Eventually will be needed for larger G-T-S framework
+
+------------------------- Harder Goals -------------------------
+[ ] Code in 'tree trimming' for vulnerabilities that are no longer a problem
+	-> NOTE: This requires a degree of intelligence (e.g. Acknowledging elements that are "immune" to specific vulnerabilities)

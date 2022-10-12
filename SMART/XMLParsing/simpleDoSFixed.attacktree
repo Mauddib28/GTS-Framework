@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attacktree:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:attacktree="http://www.example.org/attacktree" name="WebServerExample02" description="Webserver example being protected by a firewall with DoS protecttion/detection">
+  <rootNode name="Database Server">
+    <vulnerabilities name="Credentials in Clear" description="Database credential in clear in webserver code"/>
+	<vulnerabilities name="SQL injection" description="SQL injection in web application"/>
+	<subNodes name="Firewall">
+	  <vulnerabilities name="CVE-2018-0009" description="Firewall bypass"/>
+	</subNodes>
+  </rootNode>
+</attacktree:Model>

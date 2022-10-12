@@ -1,0 +1,9 @@
+The following is notes about DoS vulnerabilities:
+
+	CVE		-	Type
+CVE-2018-100031			DoS Overflow
+CVE-2018-1000300		DoS Overflow
+CVE-2018-1000153		DoS CSRF
+CVE-2018-1000168		DoS
+CVE-2018-1000039		DoS Exec Code
+CVE-2018-1000032		DoS Exec Code Overflow

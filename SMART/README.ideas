@@ -1,0 +1,8 @@
+Use ares to search CVE information
+	-> https://github.com/barnumbirr/ares
+	- Ex: 
+		>>> from ares import CVESearch
+		>>> cve = CVESearch()
+		>>> cve.browse(<vendor>)
+	-> GET /api/cveid/cveid
+		>>> cve.id('CVE-2014-0160')

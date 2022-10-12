@@ -1,0 +1,28 @@
+{
+    "Database Server": {
+        "Vulnerability List": {
+            "CVE-2017-7494": "Database credential in clear in webserver code"
+        }
+    },
+    "Firewall": {
+        "Vulnerability List": {
+            "CVE-2018-0009": "Firewall bypass",
+            "CVE-2018-0020": "Denial of Service vulnerability condition"
+        }
+    },
+    "MySQL Server": {
+        "Vulnerability List": {
+            "CVE-2017-9602": "Unauthenticated user upload and deletion leads to possible arbitary code running"
+        }
+    },
+    "MongoDB Server": {
+        "Vulnerability List": {
+            "CVE-2019-4357": "Redirected restore operation may lead to possible arbitrary code execution"
+        }
+    },
+    "CouchDB Server": {
+        "Vulnerability List": {
+            "CVE-2018-11769": "Code execution and privilege bypass"
+        }
+    }
+}

@@ -1,0 +1,68 @@
+package testFirewall
+public
+	
+	-- Bus and Data Definitions
+	bus wireless
+	end wireless;
+	bus ethernet
+	end ethernet;
+	data request
+	end request;
+	data response
+	end response;
+	
+	-- Definition of devices
+	device firewall
+		features
+			user_request : in event data port request;
+			database_res : in event data port response;
+			user_response : out event data port response;
+			database_req : out event data port request;
+		flows
+			usr_req_sink : flow sink user_request;
+			db_res_sink : flow sink database_res;
+			usr_res_src : flow source user_response;
+			db_req_src : flow source database_req;
+	end firewall;
+	
+	device implementation firewall.simple
+	end firewall.simple;
+	
+	device simpledb_database
+		features
+			database_request : in event data port request;
+			database_response : out event data port response;
+		flows
+			request_sink : flow sink database_request;
+			response_source : flow source database_response;
+	end simpledb_database;
+	
+	device implementation simpledb_database.simple
+	end simpledb_database.simple;
+	
+	-- Definition of system
+	system databaseNetwork
+		features
+			user_request : in event data port request;
+			user_response : out event data port response;
+		flows
+			flow_request : flow sink user_request;
+			flow_response : flow source user_response;
+	end databaseNetwork;
+	
+	-- Definition of system implementation
+	system implementation databaseNetwork.simple
+		subcomponents
+			system_firewall : device firewall.simple;
+			system_database : device simpledb_database.simple;
+		connections
+			-- Logical Connections
+			user_req : port user_request -> system_firewall.user_request;
+			user_res : port system_firewall.user_response -> user_response;
+			internal_req : port system_firewall.database_req -> system_database.database_request;
+			internal_res : port system_database.database_response -> system_firewall.database_res;
+		flows
+			flow_request : flow sink user_request -> user_req -> system_firewall.usr_req_sink;
+			flow_response : flow source system_firewall.usr_res_src -> user_res -> user_response;
+	end databaseNetwork.simple;
+end testFirewall;

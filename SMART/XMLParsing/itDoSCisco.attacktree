@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attacktree:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:attacktree="http://www.example.org/attacktree" name="WebServerExample03" description="WebServer example that is protected using a Cisco Firewall using ASA software 7.0">
+  <rootNode name="Database Server">
+    <vulnerabilities name="CVE-2018-0101" description="DoS and RCE vulnerability"/>
+    <vulnerabilities name="CVE-2015-0760" description="Authentication bypass"/>
+  </rootNode>
+</attacktree:Model>

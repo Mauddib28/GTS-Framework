@@ -1,0 +1,69 @@
+{
+    "Database Server": {
+        "Vulnerability List": {
+            "CVE-2017-7494": "Database credential in clear in webserver code"
+        }
+    },
+    "Firewall": {
+        "Vulnerability List": {
+            "CVE-2018-0009": "Firewall bypass",
+            "CVE-2018-0020": "Denial of Service vulnerability condition"
+        }
+    },
+    "MySQL Server": {
+        "Vulnerability List": {
+            "CVE-2014-0001": "Buffer overflow leading to Denial of Service Execute Code Overflow",
+	    "CVE-2014-0384": "Affected availability due to remote authenticated users",
+	    "CVE-2014-0386": "Availability affected by remote authenticated users",
+	    "CVE-2014-0393": "Allows remote authenticated users to affect integrity",
+	    "CVE-2014-0401": "Allows remote authenticated users to affect availability",
+	    "CVE-2014-0402": "Allows remote authenticated users to affect availability",
+	    "CVE-2014-0412": "Allows remote authenticated users to affect availability",
+	    "CVE-2014-0420": "Allows remote authenticated usess to affect availability",
+	    "CVE-2014-0437": "Allows remote authenticated users to affect availability",
+	    "CVE-2014-2419": "Allows remote authenticated users to affect availability",
+	    "CVE-2014-2430": "Allows remote authenticated users to affect availability",
+	    "CVE-2014-2431": "Allows remote authenticated users to affect availability",
+	    "CVE-2014-2432": "Allows remote authenticated users to affect availability",
+	    "CVE-2014-2436": "Allows remote authenticated users to affect availability",
+	    "CVE-2014-2438": "Allows remote authenticated users to affect availability",
+	    "CVE-2014-2440": "Allows remote authenticated users to affect confidentiality, integrity, and availability",
+	    "CVE-2014-4243": "Allows remote authenticated users to affect availability",
+	    "CVE-2014-4258": "Allows remote authenticated users to affect confidentiality, integrity, and availability",
+	    "CVE-2014-4260": "Allows remote authenticated users to affect integrity and availability",
+	    "CVE-2014-6520": "Allows remote authenticated users to affect availability",
+	    "CVE-2015-2575": "Allows remote authenticated users to affect confidentiality and integrity",
+	    "CVE-2016-7440": "Local users able to discover AES keys through leveraging cache-bank timing differences"
+        }
+    },
+    "MongoDB Server": {
+        "Vulnerability List": {
+            "CVE-2013-3969": "Denial of Service to possible arbitrary code execution",
+	    "CVE-2014-3971": "Denial of Service using invalid X.509 cert",
+	    "CVE-2014-8180": "Denial of Service using bypass authentication",
+	    "CVE-2015-1609": "Denial of Service using BSON request",
+	    "CVE-2015-7882": "Unauthorized access using LDAP authentication",
+	    "CVE-2016-3104": "Denial of Service using memory corruption and process termination",
+	    "CVE-2016-6494": "Sensitive information leakage using file read permissions",
+	    "CVE-2017-2665": "Local user reads plaintext password of skyring service",
+	    "CVE-2017-14227": "Denial of Service using heap-based buffer over-read",
+	    "CVE-2017-15535": "Denial of Service or memory modification",
+	    "CVE-2017-18381": "Exposure of default credentials during installation",
+	    "CVE-2019-2386": "Improper invalidation of authorized sessions allowing persisting user session",
+	    "CVE-2019-2389": "Incorrect scoping of kill operations in packaged SysV init scripts",
+	    "CVE-2019-2390": "Remote code execution through created OpenSSL configuraiton files"
+        }
+    },
+    "CouchDB Server": {
+        "Vulnerability List": {
+	    "CVE-2014-2668": "Denial of Service through CPU and memory corruption",
+	    "CVE-2016-8742": "Local privilege escalation through installer file permissions exploit",
+	    "CVE-2017-12635": "Code execution through allowing non-admin users to gain admin privileges",
+	    "CVE-2017-12636": "Code execution through configuration options",
+	    "CVE-2018-8007": "Code execution and privilege bypass through configuration changes using HTTP API",
+            "CVE-2018-11769": "Code execution and privilege bypass",
+	    "CVE-2018-14889": "Local code execution vulnerabilitiy in Vectra Networks Cognito Brain and Sensor before 4.3",
+	    "CVE-2018-17188": "Full system entry and access through admin users acting as regular users"
+        }
+    }
+}

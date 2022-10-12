@@ -1,0 +1,95 @@
+The purpose of this code is to serve as a framework for generating AADL models (GAM) based on
+	provided customer/consumer design "ideas"/"concepts"/"requirements"
+
+============================
+	Converting User Description to Design Terms
+============================
+
+Assumptions:
+1)	Consumer requirements are presented as a vague statement
+	Examples:
+	i)	I want a secure system for protecting my information
+	ii)	I need to protet my data from unauthenticated users
+	iii)	I want to access my information from anywhere, but for it to be safe
+	iv)	I need a safe way to move data from home to work; and vice versa
+	v)	I need a way to secure my info and protect it while in transit
+2)	Will need to perform some degree of translation from the customer statement into a working design concept
+	Steps for interpreting the customer statement:
+	i)	Look for key words being used by the customer/user/client
+		Examples: want, need, safe, ssecure, protect(ed||ing), information
+	ii)	Determine "translations"/"interpretation" for each "user key-word"
+		Examples:	want		=	desired/optional
+				need		=	required/shall
+				safe		=	integrity/fidelity of data
+				secure		=	access control/authentication/priviledge
+				protect		=	firewall/IDS/IPS
+				information	=	data at rest / data in transit
+	iii)	Generate "brainstroming" of constraints / terminology variation based on key-words identified and interpreted in steps (i) and (ii)
+		Examples:
+		(a)		Desire a solution that has a firewall / IPS / IDS and access control to provide C.I.A. to user data
+			- Note:	Bundles protection of data at rest, data in transit, and not requiring this (further internal flags?)
+		(b)		Require a solution that implements a firewall / IPS / IDS to provide C.I.A. to user data in transit
+			- Note:	Focus on data in transit; requiring this
+		(c)		Require a solution that implements access control / authentication to provide C.I.A. to user data at rest
+			- Note:	Focus on data in transit; requiring this
+	iv)	Obtain feedback from customer / client / user based on "first pass" generation of design
+		- Methods of Presening Information:
+			(a)	Written our descriptions
+			(b)	Grouping of key words / phrases
+			(c)	Present system model sketches
+				- Note:	As AADL or ascii drawing
+	v++)	Rinse and repeat previous steps to continue refining constraints and customer / client / user expectation of the expected / desired / required design
+		- Nota Bene:	Same idea as iteratively using TAMSAT + SMART
+
+============================
+	Converting Design Terms to AADL Model
+============================
+
+Givens:
+i)	"Vague" input from a client / customer
+	Example:	I want / need a safe and secure system for protecting my information
+ii)	Chosen design model language (i.e. AADL)
+	- Decision:	AADL chosen due to knowledge of TAMSAT + SMART framework
+
+Steps:
+I)	Intake the client / customer requirements / "input" (e.g. Givens.i)
+	i)	Search for "keywords" being used by said client / customer / user
+	ii)	Determine "translations" / "interpretations" for each "user key-word"
+	iii)	Generate "brainstorming" of constraints / terminology variation based on keywords identified and interpreted in steps i and ii
+	iv)	Obtain feedback from customer / client / user based on "first pass" generation of design.  Methods of Presenting Information:
+		a)	Written out description
+		b)	Grouping of key words / phrases
+		c)	Present syhstem model sketches (e.g. AADL, ascii drawing)
+	v++)	Rinse and repeat previous steps to continue refining constraints and customer / client / user expectations of the expected / desired / required design
+		(Nota Bene: Same idea as iteratively using TAMSAT + SMART)
+II)	Convert customer / client language into design terms
+	i)	Take client keywords into design terms
+	ii)	User design terminology to "spawn" multiple variations of a potential design
+		- Note: Limitations can originate from the choice of presenting designs as verbal or in pictoral form
+	iii)	Have feedback / constraints be provided by the client to refine the model description
+	iv++)	Rinse and repeat
+III)	Convert desiugn terminology into an AADL model file
+	i)	Take design description (e.g. written, pictoral) into an AADL model outline
+		- Note: Use base set of "building blocks" for AADL models; connection element, memory, etc.
+	ii)	Spawn base variations of the design
+	iii)	Request feedback from user for basic design
+	iv)	Spawn design variants using specific technologies
+		- Note: this requires a great deal of back logging TAMSAT + SMART (databases, models, exploits)
+	v++)	Rinse and repeat user iterations until acceptable AADL model is reached
+
+Note: Send AADL model to TAMSAT + SMART
+
+
+============================
+	Potential Consumer Requirements (Sketches)
+============================
+
+1)	I want to secure system for protecting my information
+2)	I need to protect my data from unauthenticated users
+3)	I want to access my information from anywhere, but for it to be safe
+4)	I need a safe way to move data from home to work; and vice versa
+5)	I need a way to secure my info and protect it while in transit
+
+Nota Bene: Using the input files for GAM's model generation has two operational functions
+i)	If provided user-defined specifics within the model, then GAM will use the generic variations of devices within its database to produce variations that meet the user-defined attributes
+ii)	If a generic set is selected then GAM will simply make use of its database of devices

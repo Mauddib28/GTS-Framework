@@ -1,0 +1,49 @@
+{
+	"devices" : {
+		"graphical_user_interface" : {
+			"brand_type" : "generic",
+			"device_io_list" : "generic",
+			"device_bus_connections" : "generic"
+		},
+		"application" : {
+			"brand_type" : "generic",
+			"device_io_list" : "generic",
+			"device_bus_connections" : "generic"
+		},
+		"server" : {
+			"brand_type" : "generic",
+			"device_io_list" : "generic",
+			"device_bus_connections" : "generic"
+		},
+		"database" : {
+			"brand_type" : "generic",
+			"device_io_list" : "generic",
+			"device_bus_connections" : "generic"
+		},
+		"sensor" : {
+			"brand_type" : "generic",
+			"device_io_list" : "generic",
+			"device_bus_connections" : ["megazigs"]
+		},
+		"device" : {
+			"brand_type" : "crazy",
+			"device_io_list" : ["http", "smb"],
+			"device_bus_connections" : ["zigbee", "uart", "metal"]
+			}
+		},
+	"system" : {
+		"system_model_name" : "crazy_test_model",
+		"system_io_list" : ["http", "smb"],
+		"system_bus_list" : ["ethernet", "breez"],
+		"system_bus_exclusion_list" : ["superzigbee"]
+	},
+	"system_architecture_map" : {
+		"database" : ["server"],
+		"server" : ["database", "sensor", "application"],
+		"sensor" : ["server"],
+		"application" : ["server", "graphical_user_interface"],
+		"graphical_user_interface" : ["application"]
+	},
+	"system_edge_devices_list" : ["graphical_user_interface", "sensor", "application"],
+	"system_asset_of_importance" : "database"
+}

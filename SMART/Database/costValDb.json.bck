@@ -1,0 +1,27 @@
+{
+	"SSH Gateway": {
+		"Cost of Initialization": "2000",
+		"Cost of Maintainence": "1500",
+		"Cost of Operation": "110"
+	},
+	"Local Employee Computer": {
+		"Cost of Initialization": "3000",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "120"
+	},
+	"Firewall": {
+		"Cost of Initialization": "8000",
+		"Cost of Maintainence": "2000",
+		"Cost of Operation": "130"
+	},
+	"Database Server": {
+		"Cost of Initialization": "10000",
+		"Cost of Maintainence": "1000",
+		"Cost of Operation": "100"
+	},
+	"Web Server": {
+		"Cost of Initialization": "7000",
+		"Cost of Maintainence": "1500",
+		"Cost of Operation": "115"
+	}
+}

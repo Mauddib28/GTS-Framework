@@ -1,0 +1,58 @@
+{
+	"generic_graphical_user_interface" : {
+		"io_list" : ["http", "smb"],
+		"bus_connections" : ["ethernet"]
+	},
+	"generic_application" : {
+		"io_list" : ["http", "ssh", "smb"],
+		"bus_connections" : ["ethernet"]
+	},
+	"generic_server" : {
+		"io_list" : ["http", "ssh", "smb", "sql"],
+		"bus_connections" : ["ethernet"]
+	},
+	"zigbee_server" : {
+		"io_list" : ["http", "ssh", "smb", "sql"],
+		"bus_connections" : ["ethernet", "zigbee"]
+	},
+	"breez_server" : {
+		"io_list" : ["http", "ssh", "smb", "sql"],
+		"bus_connections" : ["ethernet", "breez"]
+	},
+	"intel_zigbee_server" : {
+		"io_list" : ["http", "ssh", "smb", "sql"],
+		"bus_connections" : ["ethernet", "zigbee"]
+	},
+	"intel_breez_server" : {
+		"io_list" : ["http", "ssh", "smb", "sql"],
+		"bus_connections" : ["ethernet", "breez"]
+	},
+	"aspeed_zigbee_server" : {
+		"io_list" : ["http", "ssh", "smb", "sql"],
+		"bus_connections" : ["ethernet", "zigbee", "uart"]
+	},
+	"aspeed_breez_server" : {
+		"io_list" : ["http", "ssh", "smb", "sql"],
+		"bus_connections" : ["ethernet", "breez", "uart"]
+	},
+	"generic_database" : {
+		"io_list" : ["smb", "sql"],
+		"bus_connections" : ["ethernet"]
+	},
+	"oracle_database" : {
+		"io_list" : ["smb", "sql"],
+		"bus_connections" : ["ethernet"]
+	},
+	"mysql_database" : {
+		"io_list" : ["smb", "sql"],
+		"bus_connections" : ["ethernet"]
+	},
+	"generic_sensor" : {
+		"io_list" : ["ssh", "http", "ldap"],
+		"bus_connections" : ["zigbee"]
+	},
+	"breez_sensor" : {
+		"io_list" : ["ssh", "http", "ldap"],
+		"bus_connections" : ["breez"]
+	}
+}

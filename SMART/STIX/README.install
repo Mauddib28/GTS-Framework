@@ -1,0 +1,24 @@
+The following are notes on how to set-up use of stix with python
+
+-------- Stix 1.x ---------------
+pip install stix==1.2.0.6 
+pip install lxml
+pip install python-dateutil
+
+pip install setuptools
+
+git clone https://github.com/CybOXProject/python-cybox.git
+python setup.py install 
+
+git clone https://github.com/STIXProject/python-stix.git
+python setup.py install
+
+-------- Stix 2.0 -------------------
+git clone https://github.com/oasis-open/cti-python-stix2.git
+sudo pip install -r requirements.txt
+python setup.py install
+
+--------- Stix CVE Builder --------
+git clonse https://github.com/ukncsc/stix-cvebuilder.git
+sudo pip install ares
+sudo pip install -r requirements.txt

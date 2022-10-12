@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attacktree:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:attacktree="http://www.example.org/attacktree" name="WebServerExample01" description="Example of Web Server being protected behind a firewall with DoS vulnerabilitiy">
+  <rootNode name="Database Server">
+    <vulnerabilities name="CVE-2017-7494" description="Database credential in clear in webserver code"/>
+	<subNodes name="Firewall">
+	  <vulnerabilities name="CVE-2018-0009" description="Firewall bypass"/>
+	  <vulnerabilities name="CVE-2018-0020" description="Denial of Service vulnerability condition"/>
+	</subNodes>
+	<subNodes name="Local Employee Computer">
+	  <vulnerabilities name="CVE-2018-0101" description="SSL VPN function Cisco ASA exploit"/>
+	</subNodes>
+  </rootNode>
+</attacktree:Model>

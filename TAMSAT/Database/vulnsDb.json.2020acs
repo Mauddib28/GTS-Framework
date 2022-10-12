@@ -1,0 +1,28 @@
+{
+    "Database Server": {
+        "Vulnerability List": {
+            "CVE-2017-7494": "Database credential in clear in webserver code"
+        }
+    },
+    "Firewall": {
+        "Vulnerability List": {
+            "CVE-2018-0009": "Firewall bypass",
+            "CVE-2018-0020": "Denial of Service vulnerability condition"
+        }
+    },
+    "MySQL Server": {
+        "Vulnerability List": {
+            "CVE-2020-5399": "Malicious user with network access can allow for eavesdropping to possible access control bypass"
+        }
+    },
+    "MongoDB Server": {
+        "Vulnerability List": {
+            "CVE-2020-7921": "Improper implementation of authorization subsystem to possible access control bypass"
+        }
+    },
+    "CouchDB Server": {
+        "Vulnerability List": {
+            "CVE-2018-8007": "Error in configuration leads to an access control bypass that can lead to possible arbitrary code execution"
+        }
+    }
+}

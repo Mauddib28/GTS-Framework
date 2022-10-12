@@ -1,0 +1,74 @@
+{
+    "firewall": {
+        "Features List": {
+            "user_request": {
+                "Feature Direction": "in",
+                "Feature Type": "request",
+                "Feature Connection Type": "port"
+            },
+            "database_res": {
+                "Feature Direction": "in",
+                "Feature Type": "response",
+                "Feature Connection Type": "port"
+            },
+            "user_response": {
+                "Feature Direction": "out",
+                "Feature Type": "response",
+                "Feature Connection Type": "port"
+            },
+            "database_req": {
+                "Feature Direction": "out",
+                "Feature Type": "request",
+                "Feature Connection Type": "port"
+            }
+        },
+        "Flows List": {
+            "usr_req_sink": {
+                "Flow Direction": "sink",
+                "Flow Type": "flow",
+                "Flow Feature": "user_request"
+            },
+            "db_res_sink": {
+                "Flow Direction": "sink",
+                "Flow Type": "flow",
+                "Flow Feature": "database_res"
+            },
+            "usr_res_src": {
+                "Flow Direction": "source",
+                "Flow Type": "flow",
+                "Flow Feature": "user_response"
+            },
+            "db_req_src": {
+                "Flow Direction": "source",
+                "Flow Type": "flow",
+                "Flow Feature": "database_req"
+            }
+        }
+    },
+    "database": {
+        "Features List": {
+            "database_request": {
+                "Feature Direction": "in",
+                "Feature Type": "request",
+                "Feature Connection Type": "port"
+            },
+            "database_response": {
+                "Feature Direction": "out",
+                "Feature Type": "response",
+                "Feature Connection Type": "port"
+            }
+        },
+        "Flows List": {
+            "request_sink": {
+                "Flow Direction": "sink",
+                "Flow Type": "flow",
+                "Flow Feature": "database_request"
+            },
+            "response_source": {
+                "Flow Direction": "source",
+                "Flow Type": "flow",
+                "Flow Feature": "database_response"
+            }
+        }
+    }
+}

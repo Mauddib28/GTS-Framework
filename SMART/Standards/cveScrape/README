@@ -1,0 +1,18 @@
+The script in this directory 'cveScraper.sh' is meant to format copy paste data from NIST NVD website
+	into a format that can be more easily incorporated into TAMSAT + SMART
+
+TAMSAT:
+	- Merge with TAMSAT vulnsDb.json file under the correct solution (e.g. MySQL, MongoDB, CouchDB)		[cveJSON.txt]
+		- Add necessary spaces (12?) to format data for easy human-readable
+		- Nota Bene: Make sure to add entried under the correct item/solution
+	- Nota Bene: Will require some additional troubleshooting to remove special/escape characters
+		from the JSON file
+		- This prevents issues when trying to parse the JSON Datbase
+
+SMART:
+	- Run the following commands with the 'cveGrab.py' script						[cveList.txt]
+		python -i cveGrab.py
+		>> cveList = cveFile2List("filename")
+		>> genCVErisk(cveList)
+	- Merge the output riskValDb.json into the appropriate SMART riskValDb.json file
+

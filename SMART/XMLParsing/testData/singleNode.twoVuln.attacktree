@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attacktree:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:attacktree="http://www.example.org/attacktree" name="MedicalDevice02" description="Editted Model of a Compromised Medical Device">
+  <rootNode name="Database Server">
+	  <vulnerabilities name="CVE-2018-1000032" description="A heap-based buffer overflow exists in Info-Zip UnZip version 6.10c22 that allows an attacker to perform a denial of service or to possibly achieve code execution."/>
+	  <vulnerabilities name="CVE-2018-1000039" description="In MuPDF 1.12.0 and earlier, multuple heap use after free bugs in the PDF parase could allow an attacker to execute arbitrary code, read memory, or cause a denial of service via a crafter file."/>
+  </rootNode>
+</attacktree:Model>
